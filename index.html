@@ -354,19 +354,7 @@ window.mobileCheck = function() {
     return check;
 };
 
-function gyrocheck(){
-    var gyroPresent = false;
-    window.addEventListener("devicemotion", function(event){
-        if(event.rotationRate.alpha || event.rotationRate.beta || event.rotationRate.gamma){
-            return gyroPresent = true;
-        }
-        else {
-            return gyroPresent = false
-        }
-    }
-    );
-    
-}
+
 
 
 if(window.mobileCheck()){
@@ -375,7 +363,12 @@ if(window.mobileCheck()){
         // rotation along the z axis
         player.vx +=  event.beta // rotation along the x axis
         player.vy += -event.gamma // rotation along the y axis
-
+        if (player.x+player.radius>canvas.width || player.x-player.radius<0){
+            player.vx= 0;
+            };
+        if (player.y+player.radius>canvas.height || player.y-player.radius<0){
+            player.vy= 0;
+        };
     
 
     }, true);
