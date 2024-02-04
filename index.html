@@ -415,6 +415,7 @@ function handleTouchMove(evt) {
                 reset()
                 window.requestAnimationFrame(draw)
             }
+            player.ballleft();
 
         } 
         else {
@@ -426,6 +427,7 @@ function handleTouchMove(evt) {
                 reset()
                 window.requestAnimationFrame(draw)
             }
+            player.ballright();
 
         }                       
     } else {
@@ -437,6 +439,7 @@ function handleTouchMove(evt) {
                 reset()
                 window.requestAnimationFrame(draw)
             }
+            player.ballup();
            
         } 
         else { 
@@ -449,7 +452,7 @@ function handleTouchMove(evt) {
                 reset()
                 window.requestAnimationFrame(draw)
             }
-            
+            player.balldown();
             
         }                                                                 
     }
