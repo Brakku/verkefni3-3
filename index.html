@@ -22,7 +22,7 @@
 <script>
 "use strict";
 
-function toggleFullscreen() {
+function toggleFullscreen(evt) {
     
     if (!document.fullscreenElement) {
         canvas.requestFullscreen().catch((err) => {
@@ -49,6 +49,7 @@ var myScreenOrientation = window.screen.orientation;
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 window.onresize = function(event) {
+
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 };
@@ -162,7 +163,6 @@ function reset(){
     ctx.rect(0,0,canvas.width,canvas.height);
     ctx.fillStyle="white";
     ctx.fill();
-
     player.life=3;;
     gameon=true;
 };
@@ -370,14 +370,14 @@ function gyrocheck(){
 
 
 if(window.mobileCheck()){
-    if(gyrocheck()){
-        window.addEventListener('deviceorientation', event => {
-            // rotation along the z axis
-            player.vx +=  event.beta // rotation along the x axis
-            player.vy += event.gamma // rotation along the y axis
-            window.requestAnimationFrame(draw)
-        }, true);
-    }
+    
+    window.addEventListener('deviceorientation', event => {
+        // rotation along the z axis
+        player.vx +=  event.beta // rotation along the x axis
+        player.vy += event.gamma // rotation along the y axis
+        window.requestAnimationFrame(draw)
+    }, true);
+
 }
 
 
