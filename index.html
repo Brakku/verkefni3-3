@@ -360,9 +360,15 @@ window.mobileCheck = function() {
 function gyrocheck(){
     var gyroPresent = false;
     window.addEventListener("devicemotion", function(event){
-        if(event.rotationRate.alpha || event.rotationRate.beta || event.rotationRate.gamma)
-            gyroPresent = true;
-    });
+        if(event.rotationRate.alpha || event.rotationRate.beta || event.rotationRate.gamma){
+            return gyroPresent = true;
+        }
+        else {
+            return gyroPresent = false
+        }
+    }
+    );
+    
 }
 
 
