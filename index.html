@@ -361,13 +361,29 @@ if(window.mobileCheck()){
     
     window.addEventListener('deviceorientation', event => {
         // rotation along the z axis
-        player.vx +=  event.beta // rotation along the x axis
-        player.vy += -event.gamma // rotation along the y axis
+        player.vx +=  event.beta/2 // rotation along the x axis
+        player.vy += -event.gamma/2 // rotation along the y axis
         if (player.x+player.radius>canvas.width || player.x-player.radius<0){
             player.vx= 0;
             };
         if (player.y+player.radius>canvas.height || player.y-player.radius<0){
             player.vy= 0;
+        };
+        if (player.x+player.radius>canvas.width){
+            player.vx= 0;
+            player.x=-1;
+        };
+        if (player.x-player.radius<0){
+            player.vx= 0;
+            player.x=+1;
+        };
+        if (player.y+player.radius>canvas.height){
+            player.vy= 0;
+            player.y=-1;
+        };
+        if (player.y+player.radius<0){
+            player.vy= 0;
+            player.y=+1;
         };
     
 
