@@ -374,9 +374,9 @@ if(window.mobileCheck()){
     window.addEventListener('deviceorientation', event => {
         // rotation along the z axis
         player.vx +=  event.beta // rotation along the x axis
-        player.vy += event.gamma // rotation along the y axis
-        ctx.fillText(event.beta,5,65);
-        ctx.fillText(event.gamma,5,45);
+        player.vy += -event.gamma // rotation along the y axis
+
+    
 
     }, true);
 
