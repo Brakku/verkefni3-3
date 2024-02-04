@@ -379,11 +379,11 @@ if(window.mobileCheck()){
         };
         if (player.y+player.radius>canvas.height){
             player.vy= 0;
-            player.y=player.y-1;
+            player.y=player.y+1;
         };
         if (player.y+player.radius<0){
             player.vy= 0;
-            player.y=player.y+1;
+            player.y=player.y-1;
         };
     
 
