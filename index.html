@@ -371,19 +371,19 @@ if(window.mobileCheck()){
         };
         if (player.x+player.radius>canvas.width){
             player.vx= 0;
-            player.x=-1;
+            player.x= player.x-1;
         };
         if (player.x-player.radius<0){
             player.vx= 0;
-            player.x=+1;
+            player.x= player.x+1;
         };
         if (player.y+player.radius>canvas.height){
             player.vy= 0;
-            player.y=-1;
+            player.y=player.y-1;
         };
         if (player.y+player.radius<0){
             player.vy= 0;
-            player.y=+1;
+            player.y=player.y+1;
         };
     
 
