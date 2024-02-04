@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="manifest" href="manifest.json">
     <meta charset='utf-8'>
     <title>Canvas sýnidæmi</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>  
@@ -44,7 +43,7 @@ const ctx = canvas.getContext("2d");
 const audioElement = new Audio("missing file.wav");
 
 var myScreenOrientation = window.screen.orientation;
-eval(myScreenOrientation.lock("landscape"));
+eval(myScreenOrientation.lock("landscape-primary"));
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
