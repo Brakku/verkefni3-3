@@ -381,9 +381,9 @@ if(window.mobileCheck()){
             player.vy= 0;
             player.y=player.y-2;
         };
-        if (player.y+player.radius<0){
+        if (player.y-player.radius<0){
             player.vy= 0;
-            player.y=player.y+2;
+            player.y=player.y+1;
         };
     
 
