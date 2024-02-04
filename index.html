@@ -27,10 +27,11 @@ function toggleFullscreen(evt) {
     if (!document.fullscreenElement) {
         canvas.requestFullscreen().catch((err) => {
             alert(
-                `Error attempting to enable fullscreen mode: ${err.message}`,
+                `Íttu á skjáin fljótt án þess að hreifa hann`,
             );
         });
         myScreenOrientation.lock("landscape-primary");
+        raf = window.requestAnimationFrame(draw);
     };
 }
 
