@@ -20,30 +20,31 @@
     <canvas id="canvas" ></canvas>
     
 <script>
-
+"use strict";
 
 function toggleFullscreen() {
-
+    
     if (!document.fullscreenElement) {
         canvas.requestFullscreen().catch((err) => {
             alert(
                 `Error attempting to enable fullscreen mode: ${err.message}`,
             );
         });
-    }
+        myScreenOrientation.lock("landscape-primary");
+    };
 }
 
 
 
-let gameon=false
+let gameon=false;
 
-var canvas = document.getElementById('canvas')
+var canvas = document.getElementById('canvas');
 const ctx = canvas.getContext("2d");
 
 const audioElement = new Audio("missing file.wav");
 
 var myScreenOrientation = window.screen.orientation;
-myScreenOrientation.lock("landscape-primary");
+
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
@@ -52,56 +53,56 @@ window.onresize = function(event) {
     canvas.height = window.innerHeight;
 };
 let raf;
-let balls=[]
+let balls=[];
 ctx.clearRect(0, 0, canvas.width, canvas.height);
-ctx.rect(0,0,canvas.width,canvas.height)
-ctx.fillStyle="white"
-ctx.fill()
+ctx.rect(0,0,canvas.width,canvas.height);
+ctx.fillStyle="white";;
+ctx.fill();
 
 
 class playermaker {
 
     constructor (x,y,vx,vy,r,c,l) {
         
-        this.x=x
-        this.y=y
-        this.vx=vx
-        this.vy=vy
-        this.radius=r
-        this.color=c
-        this.isColliding=false
-        this.what="player"
-        this.life=l
-    }
+        this.x=x;
+        this.y=y;
+        this.vx=vx;
+        this.vy=vy;
+        this.radius=r;
+        this.color=c;
+        this.isColliding=false;
+        this.what="player";
+        this.life=l;
+    };
     draw() {
-        const angle=Math.PI / 180
+        const angle=Math.PI / 180;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0,Math.PI*2, false);
         ctx.lineTo(this.x,this.y)
         ctx.closePath();
         ctx.fillStyle = this.color;
         ctx.fill();
-        }
+        };
     
     ballup() {
-        this.vy= -1
-        this.vx= 0
-    }
+        this.vy= -1;
+        this.vx= 0;
+    };
     balldown() {
-        this.vy=  1
-        this.vx=0
-    }
+        this.vy=  1;
+        this.vx=0;
+    };
     ballright() {
-        this.vx=1
-        this.vy=0
-    }
+        this.vx=1;
+        this.vy=0;
+    };
     ballleft() {
-        this.vx=-1
-        this.vy=0
-    }
+        this.vx=-1;
+        this.vy=0;
+    };
 
     
-}
+};
 
 const player = new playermaker(100,100,0,0,20,"yellow",3);
 balls.push(player);
@@ -109,18 +110,18 @@ balls.push(player);
 class ghostmaker {
     
     constructor (x,y,vx,vy,r,c) {
-        this.x=x
-        this.y=y
-        this.vx=vx
-        this.vy=vy
-        this.radius=r
-        this.color=c
-        this.isColliding=false
-        this.what="ghost"
+        this.x=x;
+        this.y=y;
+        this.vx=vx;
+        this.vy=vy;
+        this.radius=r;
+        this.color=c;
+        this.isColliding=false;
+        this.what="ghost";
 
-        this.delay=100
+        this.delay=100;
         
-    }
+    };
 
     draw() {
         
@@ -129,39 +130,57 @@ class ghostmaker {
         ctx.closePath();
         ctx.fillStyle = this.color;
         ctx.fill();
-        }
+        };
 
 }
-
+let r1;
+let r2;
+let obj1=[];
+let obj2=[];
 for (var i=0;i<=3;i++){
     function randint(min, max) {
         return Math.floor(Math.random() * (max - min + 1) ) + min;
     }
-    r1=randint(10,canvas.width-10)
-    r2=randint(10,canvas.height-10)
-    const ghost = new ghostmaker(r1,r2,0,0,15,"black")
-    balls.push(ghost)
+
+    r1=randint(10,canvas.width-10);
+    r2=randint(10,canvas.height-10);
+    const ghost = new ghostmaker(r1,r2,0,0,15,"black");
+    balls.push(ghost);
 }
 
 
 var arrayLength = balls.length;
 
+function log(t){
+    console.log(t);
+};
 
+function reset(){
+    player.x=100;
+    player.y=100;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.rect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle="white";
+    ctx.fill();
+
+    player.life=3;;
+    gameon=true;
+};
 
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.rect(0,0,canvas.width,canvas.height)
-    ctx.fillStyle="white"
-    ctx.fill()
-    ctx.font= "25px Arial"
-    ctx.fillStyle="black"
-    let lifetext="life: "+player.life
-    ctx.fillText(lifetext,5,25)
+    ctx.rect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle="white";
+    ctx.fill();
+    ctx.font= "25px Arial";
+    ctx.fillStyle="black";
+    let lifetext="life: "+player.life;
+    ctx.fillText(lifetext,5,25);
     if(player.life===0){
-        ctx.fillText("Leik lokið",canvas.width/2,canvas.height/2)
-        gameon=false
+        ctx.fillText("Leik lokið",canvas.width/2,canvas.height/2);
+        gameon=false;
 
-    }
+    };
     if(gameon==true){
 
         
@@ -174,43 +193,43 @@ function draw() {
             
             if (balls[i].y+ + balls[i].vy > canvas.height || balls[i].y + balls[i].vy < 0) {
                 balls[i].vy = 0;
-            }
+            };
             if (balls[i].x + balls[i].vx > canvas.width || balls[i].x + balls[i].vx < 0) {
                 balls[i].vx = 0;
-            }
+            };
 
             if (balls[i].x+balls[i].radius>canvas.width || balls[i].x-balls[i].radius<0){
-                balls[i].vx= 0
-            }
+                balls[i].vx= 0;
+            };
             if (balls[i].y+balls[i].radius>canvas.height || balls[i].y-balls[i].radius<0){
-                balls[i].vy= 0
-            }
+                balls[i].vy= 0;
+            };
             
             if (balls[i].vx>1){
-                balls[i].vx=1
-            }
+                balls[i].vx=1;
+            };
             if (balls[i].vy>1){
-                balls[i].vy=1
-            }
+                balls[i].vy=1;
+            };
             if (balls[i].vx<-1){
-                balls[i].vx=-1
-            }
+                balls[i].vx=-1;
+            };
             if (balls[i].vy<-1){
-                balls[i].vy=-1
-            }
+                balls[i].vy=-1;
+            };
 
             
             
-            ctx.font= "25px Arial"
+            ctx.font= "25px Arial";
                     
-            let lifetext="life: "+player.life
-            ctx.fillText(lifetext,5,25)
+            let lifetext="life: "+player.life;
+            ctx.fillText(lifetext,5,25);
             if(player.life===0){
-                ctx.fillText("Leik lokið",canvas.width/2,canvas.height/2)
+                ctx.fillText("Leik lokið",canvas.width/2,canvas.height/2);
                 audioElement.play();
-                gameon=false
+                gameon=false;
 
-            }
+            };
             
             
 
@@ -218,12 +237,12 @@ function draw() {
             if (balls[i].what==="ghost"){
 
                 if(balls[i].delay>0){
-                    balls[i].delay =-1
-                }
-            }
+                    balls[i].delay =-1;
+                };
+            };
             
             
-        }
+        };
 
 
         function circleIntersect (x1, y1, r1, x2, y2, r2) {
@@ -251,96 +270,82 @@ function draw() {
                         else if (obj1.what ==="dot" && obj2.what==="ghost"|| obj1.what ==="ghost" && obj2.what==="dot"){}
                         
                         else if(obj1.what ==="ghost" && obj1.delay===0||obj1.delay<0){
-                            player.life-=1
-                            player.x=100
-                            player.y=100
-                            obj1.delay=100
+                            player.life-=1;
+                            player.x=100;
+                            player.y=100;
+                            obj1.delay=100;
                             navigator.vibrate([500]);
                         }
                         else if(obj2.what ==="ghost" && obj2.delay===0||obj2.delay<0){
-                            player.life-=1
-                            player.x=100
-                            player.y=100
-                            obj2.delay=100
+                            player.life-=1;
+                            player.x=100;
+                            player.y=100;
+                            obj2.delay=100;;
                             navigator.vibrate([500]);
-                        }
-                    }
+                        };
+                    };
                 }
                 else{
                     obj1.isColliding = false;
                     obj2.isColliding = false;
-                }
-            }
-        }
+                };
+            };
+        };
         
         raf = window.requestAnimationFrame(draw);
-    }
-}
+    };
+};
 
 document.addEventListener("keydown", (event) => {
-    console.log("key pressed")
+    console.log("key pressed");
     if (event.key === "ArrowUp"){
         if (gameon===false) {
-            gameon=true
-            reset()
-            window.requestAnimationFrame(draw)
-        }
-        toggleFullscreen()
-        player.ballup()
+            gameon=true;
+            reset();
+            window.requestAnimationFrame(draw);
+        };
+        toggleFullscreen();
+        player.ballup();
         
     }
     if (event.key === "ArrowDown"){
         if (gameon===false) {
-            gameon=true
-            reset()
-            window.requestAnimationFrame(draw)
-        }
-        toggleFullscreen()
-        player.balldown()
+            gameon=true;
+            reset();;
+            window.requestAnimationFrame(draw);
+        };
+        toggleFullscreen();
+        player.balldown();
         
-    }
+    };
     if (event.key === "ArrowLeft"){
         if (gameon===false) {
-            gameon=true
-            reset()
-            window.requestAnimationFrame(draw)
+            gameon=true;
+            reset();
+            window.requestAnimationFrame(draw);
         }
-        toggleFullscreen()
-        player.ballleft()
+        toggleFullscreen();
+        player.ballleft();
         
     }
     if (event.key === "ArrowRight"){
         if (gameon===false) {
-            gameon=true
-            reset()
-            window.requestAnimationFrame(draw)
-        }
-        toggleFullscreen()
-        player.ballright()
+            gameon=true;
+            reset();;
+            window.requestAnimationFrame(draw);
+        };
+        toggleFullscreen();
+        player.ballright();
         
     }
 
     
-})
+});
 
 
 
 
-function log(t){
-    console.log(t)
-}
 
-function reset(){
-    player.x=100
-    player.y=100
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.rect(0,0,canvas.width,canvas.height)
-    ctx.fillStyle="white"
-    ctx.fill()
-
-    player.life=3
-    gameon=true
-}
 
 
 window.mobileCheck = function() {
@@ -458,6 +463,7 @@ function handleTouchMove(evt) {
     xDown = null;
     yDown = null;                                             
 };
+
 
 document.addEventListener('touchstart', handleTouchStart, false);
 document.addEventListener('touchend', toggleFullscreen, false);        
