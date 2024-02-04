@@ -430,7 +430,8 @@ function handleTouchMove(evt) {
                 reset()
                 window.requestAnimationFrame(draw)
             }
-            player.ballleft();
+            raf = window.requestAnimationFrame(draw);
+
 
         } 
         else {
@@ -442,7 +443,8 @@ function handleTouchMove(evt) {
                 reset()
                 window.requestAnimationFrame(draw)
             }
-            player.ballright();
+            raf = window.requestAnimationFrame(draw);
+
 
         }                       
     } else {
@@ -454,7 +456,7 @@ function handleTouchMove(evt) {
                 reset()
                 window.requestAnimationFrame(draw)
             }
-            player.ballup();
+            raf = window.requestAnimationFrame(draw);
            
         } 
         else { 
@@ -467,7 +469,7 @@ function handleTouchMove(evt) {
                 reset()
                 window.requestAnimationFrame(draw)
             }
-            player.balldown();
+            raf = window.requestAnimationFrame(draw);
             
         }                                                                 
     }
