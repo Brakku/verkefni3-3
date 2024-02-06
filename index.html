@@ -544,7 +544,7 @@ function handleTouchMove(evt) {
 
 
 document.addEventListener('touchstart', handleTouchStart, false);
-document.addEventListener('touchend', toggleFullscreen, false);        
+document.addEventListener('touchmove', toggleFullscreen, false);        
 document.addEventListener('touchmove', handleTouchMove, false);
 
 for (var i = 0; i < arrayLength; i++) {
