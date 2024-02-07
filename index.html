@@ -44,7 +44,6 @@ const ctx = canvas.getContext("2d");
 
 function playAudio() { 
     log("audio played");
-    console.log("audio played")
     var audio = new Audio("victory.mp3");
     audio.play();
 };
@@ -308,6 +307,7 @@ function draw() {
                 
                     if (obj1.what ==="ghost" && obj2.what==="ghost"){}
                     else if (obj1.what ==="end" && obj2.what==="player"){
+                        playAudio();
                         player.life=player.life-3;
                         
                         ctx.font= "25px Arial";
@@ -320,9 +320,8 @@ function draw() {
                     else if (obj1.what ==="ghost" && obj2.what==="end"){}
                     else if (obj1.what ==="end" && obj2.what==="ghost"){}
 
-                    else if (obj1.what ==="player" && obj2.what==="end"){
+                    else if (obj2.what ==="player" && obj1.what==="end"){
                         playAudio();
-                        console.log("audio played")
                         ctx.font= "25px Arial";
                         ctx.fillStyle="black";
                         ctx.fillText("Leik lokið swipe til að birja aftur",canvas.width/2-20,canvas.height/2);
