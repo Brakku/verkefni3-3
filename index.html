@@ -305,7 +305,6 @@ function draw() {
                     obj1.isColliding = true;
                     obj2.isColliding = true;
                     
-                    if (obj1.what ==="ghost" || obj2.what==="ghost"){}
                 
                     if (obj1.what ==="ghost" && obj2.what==="ghost"){}
                     else if (obj1.what ==="end" && obj2.what==="player"){
@@ -318,8 +317,11 @@ function draw() {
                         
                     }
 
-                    else if (obj1.what ==="player" && obj2.what==="end"){
+                    else if (obj1.what ==="ghost" && obj2.what==="end"){}
+                    else if (obj1.what ==="end" && obj2.what==="ghost"){}
 
+                    else if (obj1.what ==="player" && obj2.what==="end"){
+                        audioElement.play();
                         ctx.font= "25px Arial";
                         ctx.fillStyle="black";
                         ctx.fillText("Leik lokið swipe til að birja aftur",canvas.width/2-20,canvas.height/2);
