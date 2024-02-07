@@ -5,6 +5,11 @@
     <title>Canvas sýnidæmi</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>  
 </head>
+<audio id="myAudio">
+
+  <source src="victory.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
 <body>
     <style>
         * { margin:0; padding:0; } /* to remove the top and left whitespace */
@@ -42,7 +47,7 @@ let gameon=false;
 var canvas = document.getElementById('canvas');
 const ctx = canvas.getContext("2d");
 
-const audioElement = new Audio("victory.mp3");
+const audioElement = document.getElementById("myAudio")
 
 var myScreenOrientation = window.screen.orientation;
 
